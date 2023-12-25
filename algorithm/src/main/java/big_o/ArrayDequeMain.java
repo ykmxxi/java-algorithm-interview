@@ -2,25 +2,41 @@ package big_o;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.LinkedList;
 
 public class ArrayDequeMain {
 
     public static void main(String[] args) {
         Deque<Integer> arrayDeque = new ArrayDeque<>();
+        Deque<Integer> linkedListDeque = new LinkedList<>();
 
         long start = System.currentTimeMillis();
-        for (int i = 0; i < 100_000_000; i++) {
+        for (int i = 0; i < 50_000_000; i++) {
             arrayDeque.offer(i);
         }
         long end = System.currentTimeMillis();
-        System.out.println("시간 : " + (end - start) + "ms");
+        System.out.println("ArrayDeque 삽입 시간 : " + (end - start) + "ms"); // 1664
+
+        start = System.currentTimeMillis();
+        for (int i = 0; i < 50_000_000; i++) {
+            linkedListDeque.offer(i);
+        }
+        end = System.currentTimeMillis();
+        System.out.println("LinkedList 삽입 시간 : " + (end - start) + "ms"); // 6259
 
         start = System.currentTimeMillis();
         for (int i = 0; i < 10_000_000; i++) {
             arrayDeque.poll();
         }
         end = System.currentTimeMillis();
-        System.out.println("시간 : " + (end - start) + "ms");
+        System.out.println("ArrayDeque 추출 시간 : " + (end - start) + "ms"); // 32
+
+        start = System.currentTimeMillis();
+        for (int i = 0; i < 10_000_000; i++) {
+            linkedListDeque.poll();
+        }
+        end = System.currentTimeMillis();
+        System.out.println("LinkedList 추출 시간 : " + (end - start) + "ms"); // 117
 
         Deque<Object> deque = new ArrayDeque<>();
         deque.offer(1);

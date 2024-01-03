@@ -67,15 +67,16 @@ public class AvlTree<E> {
         // 왼쪽 서브 트리가 오른쪽 서브 트리보다 긴 경우
         if (height(node.left) - height(node.right) > 1) {
             // 노드의 왼쪽 자식의 왼쪽 서브 트리에서 문제 발생
-            if (height(node.left.left) >= height(node.left.right)) {
+            if (height(node.left.left) > height(node.left.right)) {
                 node = rightRotate(node); // 우측 회전
-            } else { // 노드의 왼쪽 자식의 오른쪽 서브 트리에서 문제 발생
+            } else if (height(node.left.right) > height(node.left.left)) { // 노드의 왼쪽 자식의 오른쪽 서브 트리에서 문제 발생
                 node = leftRightRotate(node); // 좌측-우측 회전
             }
         } else if (height(node.right) - height(node.left) > 1) { // 오른쪽 서브 트리가 왼쪽 서브 트리보다 긴 경우
-            if (height(node.right.right) >= height(node.right.left)) { // 오른쪽 서브 트리 > 왼쪽 서브 트리
+            // 오른쪽 자식의 오른쪽 서브 트리에서 문제 발생
+            if (height(node.right.right) > height(node.right.left)) {
                 node = leftRotate(node); // 좌측 회전
-            } else { // 오른쪽 서브 트리 < 왼쪽 서브 트리
+            } else if (height(node.right.left) > height(node.right.right)) { // 오른쪽 자식의 왼쪽 서브 트리에서 문제 발생
                 node = rightLeftRotate(node); // 우측-좌측 회전
             }
         }

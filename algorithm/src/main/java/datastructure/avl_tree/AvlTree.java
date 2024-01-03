@@ -96,16 +96,22 @@ public class AvlTree<E> {
 
     // root 노드를 기준으로 왼쪽 회전
     private Node<E> leftRotate(Node<E> root) {
+        // 우선, root의 오른쪽 자식을 temp로 지정합니다.
         Node<E> temp = root.right;
 
+        // root의 오른쪽 자식을 temp의 왼쪽 자식으로 변경합니다.
         root.right = temp.left;
+
+        // temp의 왼쪽 자식이 존재하면, 그 자식의 부모를 root로 설정합니다.
         if (temp.left != null) {
             temp.left.parent = root;
         }
 
+        // temp의 왼쪽을 root로, temp를 root의 부모로 설정합니다.
         temp.left = root;
         temp.parent = root.parent;
 
+        // root의 부모가 존재하면, root가 부모의 왼쪽 자식인지 오른쪽 자식인지 확인 후 temp를 연결합니다.
         if (root.parent != null) {
             if (root.parent.left == root) {
                 root.parent.left = temp;
@@ -114,23 +120,31 @@ public class AvlTree<E> {
             }
         }
 
+        // root의 부모를 temp로 변경합니다.
         root.parent = temp;
 
+        // 회전이 완료된 트리의 루트인 temp를 반환합니다.
         return temp;
     }
 
     // root 노드를 기준으로 오른쪽 회전
     private Node<E> rightRotate(Node<E> root) {
+        // 우선, root의 왼쪽 자식을 temp로 지정합니다.
         Node<E> temp = root.left;
 
+        // root의 왼쪽 자식을 temp의 오른쪽 자식으로 변경합니다.
         root.left = temp.right;
+
+        // temp의 오른쪽 자식이 존재하면, 그 자식의 부모를 root로 설정합니다.
         if (temp.right != null) {
             temp.right.parent = root;
         }
 
+        // temp의 오른쪽을 root로, temp를 root의 부모로 설정합니다.
         temp.right = root;
         temp.parent = root.parent;
 
+        // root의 부모가 존재하면, root가 부모의 왼쪽 자식인지 오른쪽 자식인지 확인 후 temp를 연결합니다.
         if (root.parent != null) {
             if (root.parent.left == root) {
                 root.parent.left = temp;
@@ -139,10 +153,13 @@ public class AvlTree<E> {
             }
         }
 
+        // root의 부모를 temp로 변경합니다.
         root.parent = temp;
 
+        // 회전이 완료된 트리의 루트인 temp를 반환합니다.
         return temp;
     }
+
 
     // root 노드를 기준으로 왼쪽-오른쪽 회전
     private Node<E> leftRightRotate(Node<E> root) {
